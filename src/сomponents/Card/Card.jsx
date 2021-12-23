@@ -1,19 +1,19 @@
+import React from 'react';
+
 import './Card.scss';
 
-import rick from '../../img/rick.jpg'
-
-function Card() {
+function Card({info}) {
   return (
     <div className="card">
       <img
-        src={rick}
+        src={info.image}
         className='card__img'
         alt='картинка'
       />
       <div className='card__tooltip'>
-        <p>NameNameNPPPame</p>
-        <p>Status</p>
-        <p>Species</p>
+        <p>{info.name}</p>
+        <p>{info.status}</p>
+        <p>{info.species}</p>
       </div>
     </div>
   );

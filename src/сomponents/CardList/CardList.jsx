@@ -1,12 +1,16 @@
+import React from 'react';
+
 import Card from '../Card/Card';
-import'./CardList.scss';
+import './CardList.scss';
 
-function CardList() {
-  //вызов асинккриэйта
-
+function CardList({cardList}) {
   return (
     <div className="cardList">
-      <Card />
+      {
+        cardList.map((card) => {
+          return <Card info={card} key={card.id} />;
+        })
+      }
     </div>
   );
 }

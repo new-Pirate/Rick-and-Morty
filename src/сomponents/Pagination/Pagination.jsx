@@ -1,3 +1,5 @@
+import React from 'react';
+
 import'./Pagination.scss';
 
 function Pagination() {

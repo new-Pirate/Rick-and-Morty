@@ -1,12 +1,16 @@
+import React from 'react';
+
 import './Search.scss';
 
-function Search() {
+function Search({onSearch}) {
+
   return (
     <div className="search">
       <input
         type="text"
         placeholder='Поиск персонажей'
         className='search__input'
+        onChange={onSearch}
       />
     </div>
   );
