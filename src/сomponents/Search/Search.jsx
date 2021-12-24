@@ -14,6 +14,6 @@ function Search({onSearch}) {
       />
     </div>
   );
-}
+};
 
 export default Search;

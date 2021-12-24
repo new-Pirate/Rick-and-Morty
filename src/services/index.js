@@ -1,6 +1,6 @@
 
 export class BASE_API {
-  get(name, page) {
+  get(name, page = 1) {
     return this.sendRequest('GET', `https://rickandmortyapi.com/api/character/?page=${page}&name=${name}`);
   };
 
@@ -25,7 +25,7 @@ export class BASE_API {
       if (!response.ok) {
         throw new Error(`Статус ошибки: ${response.status} сообщение: ${response.message}`);
       };
-      return await Promise.resolve(json.results);
+      return await Promise.resolve(json);
     } catch (error) {
       return await Promise.reject(error);
     };

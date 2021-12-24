@@ -4,7 +4,7 @@ import {
   FETCH_CHARACTERS_LIST_FAILED
 } from '../types/characters';
 
-import { BASE_API } from '../../api';
+import { BASE_API } from '../../services';
 
 const API = new BASE_API();
 
@@ -28,7 +28,7 @@ export const fetchCharactersListFailed = (payload) => {
   }
 };
 
-export const gerCharactersList = (name, page = 1) => (dispatch) => {
+export const gerCharactersList = (name, page) => (dispatch) => {
   dispatch(fetchCharactersListRequest());
 
   API.get(name, page)

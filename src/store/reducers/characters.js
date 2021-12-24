@@ -7,7 +7,8 @@ import {
 const initialState = {
   loading: false,
   error: null,
-  charactersList: []
+  charactersList: [],
+  pages: null
 }
 
 export const charactersReduser = (state = initialState, { type, payload }) => {
@@ -17,7 +18,8 @@ export const charactersReduser = (state = initialState, { type, payload }) => {
         ...state,
         loading: true,
         error: null,
-        charactersList: []
+        charactersList: [],
+        pages: null
       };
 
     case FETCH_CHARACTERS_LIST_SUCCESS:
@@ -25,14 +27,17 @@ export const charactersReduser = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: null,
-        charactersList: payload
+        charactersList: payload.results,
+        pages: payload.info.pages
       };
 
     case FETCH_CHARACTERS_LIST_FAILED:
       return {
         ...state,
         loading: false,
-        error: payload.message
+        error: payload.message,
+        charactersList: [],
+        pages: null
       };
 
     default:
