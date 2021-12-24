@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { gerCharactersList } from '../../store/actions/characters.js';
 
@@ -7,6 +7,7 @@ import './Pagination.scss';
 
 function Pagination({ pagesList, term }) {
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.charactersReduser.loading);
   const arrPages = Array(pagesList).fill(null).map((page, i) => i + 1);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -20,7 +21,7 @@ function Pagination({ pagesList, term }) {
   };
 
   return (
-    <div className="pagination">
+    <div className={loading ? 'pagination pagination_hide' : 'pagination'}>
       {
         arrPages.map((page) => {
           return <div
