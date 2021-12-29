@@ -14,6 +14,7 @@ function App() {
   const characters = useSelector(state => state.charactersReduser.charactersList);
   const pages = useSelector(state => state.charactersReduser.pages);
   const [term, setTerm] = useState('');
+  const [arrPages, setArrPages] = useState([]);
 
   useEffect(() => {
     if (term.length > 2) {
@@ -23,6 +24,11 @@ function App() {
     }
   }, [term]);
 
+  useEffect(() => {
+    const arr = Array(pages).fill(null).map((page, i) => i + 1);
+    setArrPages(arr);
+  }, [pages])
+
   const onSearch = useDebounced((e) => {
     setTerm(e.target.value);
   });
@@ -30,7 +36,7 @@ function App() {
   return (
     <div className="app">
       <Search onSearch={onSearch} />
-      <Pagination pagesList={pages} term={term} />
+      <Pagination pagesList={arrPages} term={term} />
       <CardList cardList={characters} />
     </div>
   );
