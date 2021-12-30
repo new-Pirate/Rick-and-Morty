@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { gerCharactersList } from '../../store/actions/characters.js';
+import { filterPagination } from '../../hooks/filterPagination';
 
 import './Pagination.scss';
 
@@ -16,24 +17,8 @@ function Pagination({ pagesList, term }) {
   }, [term]);
 
   useEffect(() => {
-    filterPagination();
+    setFilterPages(filterPagination(pagesList, currentPage));
   }, [pagesList]);
-
-  const filterPagination = () => {
-    if (pagesList.length !== 0 && pagesList.length !== 1) {
-      if (currentPage === 1) {
-        setFilterPages([currentPage, pagesList[1], pagesList[pagesList.length - 1]]);
-      } else if (currentPage === pagesList[pagesList.length - 1]) {
-        setFilterPages([pagesList[0], pagesList[pagesList.length - 2], currentPage]);
-      } else if (currentPage === pagesList[1]) {
-        setFilterPages([pagesList[0], currentPage, currentPage + 1, pagesList[pagesList.length - 1]]);
-      } else if (currentPage === pagesList[pagesList.length - 2]) {
-        setFilterPages([pagesList[0], currentPage - 1, currentPage, pagesList[pagesList.length - 1]]);
-      } else {
-        setFilterPages([pagesList[0], currentPage - 1, currentPage, currentPage + 1, pagesList[pagesList.length - 1]]);
-      };
-    };
-  };
 
   const activePage = (page) => {
     setCurrentPage(page);
@@ -53,6 +38,7 @@ function Pagination({ pagesList, term }) {
               <div className='pagination__dots'>...</div>
               <div
                 className={currentPage === page ? 'pagination__number pagination__number_active' : 'pagination__number'}
+                key={page}
                 onClick={() => activePage(page)}
               >
                 {page}
