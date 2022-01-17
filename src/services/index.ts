@@ -1,16 +1,16 @@
 
 export class BASE_API {
-  get(name, page = 1) {
+  get(name: string, page = 1) {
     return this.sendRequest('GET', `https://rickandmortyapi.com/api/character/?page=${page}&name=${name}`);
   };
 
-  sendRequest = async (method, url, body) => {
+  sendRequest = async (method: string, url: string, body: string = '') => {
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json; charset=UTF-8'
     };
 
-    const config = {
+    const config: any = {
       method,
       headers
     };
@@ -20,7 +20,7 @@ export class BASE_API {
     };
 
     try {
-      const response = await fetch(url, config);
+      const response: any = await fetch(url, config);
       const json = await response.json();
       if (!response.ok) {
         throw new Error(`Статус ошибки: ${response.status} сообщение: ${response.message}`);

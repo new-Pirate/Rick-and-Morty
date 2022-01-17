@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { gerCharactersList } from '../../store/actions/characters.js';
+import { gerCharactersList } from '../../store/actions/characters';
 import { filterPagination } from '../../hooks/filterPagination';
-
+import { RootState } from '../../store/index';
 import './Pagination.scss';
 
-function Pagination({ pagesList, term }) {
+interface IPagination {
+  pagesList: number[];
+  term: string;
+};
+
+function Pagination({ pagesList, term }: IPagination) {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.charactersReduser.loading);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filterPages, setFilterPages] = useState([]);
+  const loading = useSelector((state: RootState) => state.charactersReduser.loading);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filterPages, setFilterPages] = useState<Array<number>>([]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -18,9 +23,9 @@ function Pagination({ pagesList, term }) {
 
   useEffect(() => {
     setFilterPages(filterPagination(pagesList, currentPage));
-  }, [pagesList]);
+  }, [currentPage, pagesList]);
 
-  const activePage = (page) => {
+  const activePage = (page: number) => {
     setCurrentPage(page);
     if (term.length > 2) {
       dispatch(gerCharactersList(term, page));

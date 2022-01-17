@@ -2,7 +2,16 @@ import React from 'react';
 
 import './Card.scss';
 
-function Card({info}) {
+interface ICard {
+  info: {
+    image: string;
+    name: string;
+    status: string;
+    species: string;
+  };
+};
+
+function Card({info}: ICard) {
   return (
     <div className="card">
       <img

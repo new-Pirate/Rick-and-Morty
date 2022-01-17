@@ -1,4 +1,4 @@
-export const filterPagination = (pagesList, currentPage) => {
+export const filterPagination = (pagesList: number[], currentPage: number) => {
   if (pagesList.length !== 0 && pagesList.length !== 1) {
     if (currentPage === 1) {
       return [currentPage, pagesList[1], pagesList[pagesList.length - 1]];

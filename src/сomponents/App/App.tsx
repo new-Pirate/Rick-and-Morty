@@ -4,17 +4,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import Search from '../Search/Search';
 import Pagination from '../Pagination/Pagination';
 import CardList from '../CardList/CardList';
-import { gerCharactersList } from '../../store/actions/characters.js';
+import { gerCharactersList } from '../../store/actions/characters';
 import { useDebounced } from '../../hooks/useDebounce'
+import { RootState } from '../../store';
 
 import './App.scss';
 
 function App() {
   const dispatch = useDispatch();
-  const characters = useSelector(state => state.charactersReduser.charactersList);
-  const pages = useSelector(state => state.charactersReduser.pages);
-  const [term, setTerm] = useState('');
-  const [arrPages, setArrPages] = useState([]);
+  const characters = useSelector((state: RootState) => state.charactersReduser.charactersList);
+  const pages = useSelector((state: RootState) => state.charactersReduser.pages);
+  const [term, setTerm] = useState<string>('');
+  const [arrPages, setArrPages] = useState<Array<number>>([]);
 
   useEffect(() => {
     if (term.length > 2) {
@@ -22,14 +23,14 @@ function App() {
     } else if (term === '') {
       dispatch(gerCharactersList(''));
     }
-  }, [term]);
+  }, [dispatch, term]);
 
   useEffect(() => {
     const arr = Array(pages).fill(null).map((page, i) => i + 1);
     setArrPages(arr);
-  }, [pages])
+  }, [pages]);
 
-  const onSearch = useDebounced((e) => {
+  const onSearch = useDebounced((e: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
   });
 

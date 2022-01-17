@@ -2,8 +2,13 @@ import React from 'react';
 
 import Card from '../Card/Card';
 import './CardList.scss';
+import { ICard } from '../../types/tupes';
 
-function CardList({ cardList }) {
+interface ICardList {
+  cardList: ICard[];
+};
+
+function CardList({ cardList }: ICardList) {
   return (
     <div className="cardList">
       {

@@ -9,9 +9,14 @@ const initialState = {
   error: null,
   charactersList: [],
   pages: null
-}
+};
 
-export const charactersReduser = (state = initialState, { type, payload }) => {
+interface IReducer {
+  type: string;
+  payload: any;
+};
+
+export const charactersReduser = (state = initialState, { type, payload }: IReducer) => {
   switch (type) {
     case FETCH_CHARACTERS_LIST_REQUEST:
       return {

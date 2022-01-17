@@ -14,21 +14,21 @@ export const fetchCharactersListRequest = () => {
   }
 };
 
-export const fetchCharactersListSuccess = (payload) => {
+export const fetchCharactersListSuccess = (payload: any) => {
   return {
     type: FETCH_CHARACTERS_LIST_SUCCESS,
     payload
   }
 };
 
-export const fetchCharactersListFailed = (payload) => {
+export const fetchCharactersListFailed = (payload: any) => {
   return {
     type: FETCH_CHARACTERS_LIST_FAILED,
     payload
   }
 };
 
-export const gerCharactersList = (name, page) => (dispatch) => {
+export const gerCharactersList = (name: string, page = 1) => (dispatch: (arg0: { type: string; payload?: any; }) => void) => {
   dispatch(fetchCharactersListRequest());
 
   API.get(name, page)
